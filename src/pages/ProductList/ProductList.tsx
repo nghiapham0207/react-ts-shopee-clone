@@ -9,6 +9,7 @@ import Pagination from "../../components/Pagination";
 import { ProductListConfig } from "../../types/product.type";
 import categoryApi from "../../apis/category.api";
 import useQueryConfig from "../../hooks/useQueryConfig";
+import ProductSkeleton from "./components/Product/ProductSkeleton";
 
 export default function ProductList() {
 	const queryConfig = useQueryConfig();
@@ -35,11 +36,11 @@ export default function ProductList() {
 				<meta name="description" content="Shopee - danh sách sản phẩm" />
 			</Helmet>
 			<div className="container">
-				{productsData && (
-					<div className="grid grid-cols-12 gap-6">
-						<div className="col-span-3">
-							<AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
-						</div>
+				<div className="grid grid-cols-12 gap-6">
+					<div className="col-span-3">
+						<AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
+					</div>
+					{productsData && (
 						<div className="col-span-9">
 							<SortProductList
 								queryConfig={queryConfig}
@@ -57,8 +58,20 @@ export default function ProductList() {
 								pageSize={productsData.data.data.pagination.page_size}
 							/>
 						</div>
-					</div>
-				)}
+					)}
+					{!productsData && (
+						<div className="col-span-9 animate-pulse">
+							<div className="h-14 w-full rounded bg-gray-100"></div>
+							<div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+								{Array(10)
+									.fill(0)
+									.map((_, index) => (
+										<ProductSkeleton key={index} />
+									))}
+							</div>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);

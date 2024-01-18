@@ -69,7 +69,7 @@ export default function Register() {
 				<meta name="description" content="Shopee - Đăng ký" />
 			</Helmet>
 			<div className="container">
-				<div className="grid grid-cols-1 py-10 lg:grid-cols-5 lg:py-32 lg:pr-10">
+				<div className="grid grid-cols-1 py-6 lg:grid-cols-5 lg:py-12 lg:pr-10">
 					<div className="lg:col-span-2 lg:col-start-4">
 						<form className="rounded bg-white p-10 shadow-sm" onSubmit={onSubmit} noValidate>
 							<div className="text-2xl">Đăng ký</div>

@@ -19,6 +19,7 @@ import purchaseApi from "../../apis/purchase.api";
 import { purchasesStatus } from "../../constants/purchase";
 import path from "../../constants/path";
 import { useTranslation } from "react-i18next";
+import ProductDetailSkeleton from "./ProductDetailSkeleton";
 
 export default function ProductDetail() {
 	const { t } = useTranslation(["product"]);
@@ -128,8 +129,7 @@ export default function ProductDetail() {
 	};
 
 	if (!product) {
-		// skeleton loading
-		return null;
+		return <ProductDetailSkeleton />;
 	}
 	return (
 		<div className="bg-gray-200 py-6">
