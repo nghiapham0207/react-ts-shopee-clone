@@ -7,6 +7,7 @@ import { AppContext } from "../contexts/app.context";
 import path from "../constants/path";
 import CartLayout from "../layouts/CartLayout";
 import UserLayout from "../pages/User/layouts/UserLayout";
+import PageLoading from "../components/PageLoading";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Login = lazy(() => import("../pages/Login"));
@@ -46,7 +47,7 @@ export default function useRouteElements() {
 			index: true,
 			element: (
 				<MainLayout>
-					<Suspense fallback={<div>loading...</div>}>
+					<Suspense fallback={<PageLoading />}>
 						<ProductList />
 					</Suspense>
 				</MainLayout>
@@ -56,7 +57,7 @@ export default function useRouteElements() {
 			path: path.productDetail,
 			element: (
 				<MainLayout>
-					<Suspense fallback={<div>loading...</div>}>
+					<Suspense fallback={<PageLoading />}>
 						<ProductDetail />
 					</Suspense>
 				</MainLayout>
@@ -70,7 +71,7 @@ export default function useRouteElements() {
 					path: path.cart,
 					element: (
 						<CartLayout>
-							<Suspense fallback={<div>loading...</div>}>
+							<Suspense fallback={<PageLoading />}>
 								<Cart />
 							</Suspense>
 						</CartLayout>
@@ -87,7 +88,7 @@ export default function useRouteElements() {
 						{
 							path: path.profile,
 							element: (
-								<Suspense fallback={<div>loading...</div>}>
+								<Suspense fallback={<PageLoading />}>
 									<Profile />
 								</Suspense>
 							),
@@ -95,7 +96,7 @@ export default function useRouteElements() {
 						{
 							path: path.changePassword,
 							element: (
-								<Suspense fallback={<div>loading...</div>}>
+								<Suspense fallback={<PageLoading />}>
 									<ChangePassword />
 								</Suspense>
 							),
@@ -103,7 +104,7 @@ export default function useRouteElements() {
 						{
 							path: path.historyPurchase,
 							element: (
-								<Suspense fallback={<div>loading...</div>}>
+								<Suspense fallback={<PageLoading />}>
 									<HistoryPurchase />
 								</Suspense>
 							),
@@ -120,7 +121,7 @@ export default function useRouteElements() {
 					path: path.login,
 					element: (
 						<RegisterLayout>
-							<Suspense fallback={<div>loading...</div>}>
+							<Suspense fallback={<PageLoading />}>
 								<Login />
 							</Suspense>
 						</RegisterLayout>
@@ -130,7 +131,7 @@ export default function useRouteElements() {
 					path: path.register,
 					element: (
 						<RegisterLayout>
-							<Suspense fallback={<div>loading...</div>}>
+							<Suspense fallback={<PageLoading />}>
 								<Register />
 							</Suspense>
 						</RegisterLayout>
@@ -142,7 +143,7 @@ export default function useRouteElements() {
 			path: "*",
 			element: (
 				<MainLayout>
-					<Suspense fallback={<div>loading...</div>}>
+					<Suspense fallback={<PageLoading />}>
 						<NotFound />
 					</Suspense>
 				</MainLayout>

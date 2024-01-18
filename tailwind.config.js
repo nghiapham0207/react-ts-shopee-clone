@@ -14,6 +14,16 @@ export default {
 			colors: {
 				orange: "#ee4d2d",
 			},
+			keyframes: {
+				wiggle: {
+					"0%, 100%": {
+						transform: "translateY(2px)",
+					},
+					"50%": {
+						transform: "translateY(-2px)",
+					},
+				},
+			},
 		},
 	},
 	plugins: [
