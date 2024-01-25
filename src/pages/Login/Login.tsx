@@ -12,12 +12,14 @@ import { isAxiosUnprocessableEntityError } from "../../utils/utils";
 import { ErrorResponse } from "../../types/utils.type";
 import { AppContext } from "../../contexts/app.context";
 import Button from "../../components/Button";
+import useQueryParams from "../../hooks/useQueryParams";
 
 type FormData = Pick<Schema, "email" | "password">;
 const loginSchema = schema.pick(["email", "password"]);
 
 export default function Login() {
 	const { setIsAuthenticated, setProfile } = useContext(AppContext);
+	const { next } = useQueryParams();
 	const navigate = useNavigate();
 	const {
 		register,
@@ -35,10 +37,13 @@ export default function Login() {
 			onSuccess: (data) => {
 				setIsAuthenticated(true);
 				setProfile(data.data.data.user);
-				navigate("/");
+				if (next) {
+					navigate(next);
+				} else {
+					navigate("/");
+				}
 			},
 			onError: (error) => {
-				console.log(error);
 				if (
 					isAxiosUnprocessableEntityError<ErrorResponse<Omit<FormData, "confirm_password">>>(error)
 				) {

@@ -1,9 +1,9 @@
-# build
+# rollup plugin visualizer
 stats.html
 
 # test
 coverage/
-testcase.xlsx
+*.xlsx
 
 # Logs
 logs

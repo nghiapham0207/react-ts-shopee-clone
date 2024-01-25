@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import { toast } from "react-toastify";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -20,8 +20,10 @@ import { purchasesStatus } from "../../constants/purchase";
 import path from "../../constants/path";
 import { useTranslation } from "react-i18next";
 import ProductDetailSkeleton from "./ProductDetailSkeleton";
+import { AppContext } from "../../contexts/app.context";
 
 export default function ProductDetail() {
+	const { isAuthenticated } = useContext(AppContext);
 	const { t } = useTranslation(["product"]);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
@@ -62,7 +64,14 @@ export default function ProductDetail() {
 		}
 	}, [product]);
 
+	const requireLogin = () => {
+		const pathname = window.location.pathname;
+		if (!isAuthenticated) {
+			return navigate(`${path.login}?next=${encodeURIComponent(pathname)}`);
+		}
+	};
 	const addToCart = () => {
+		requireLogin();
 		addToCartMutation.mutate(
 			{ buy_count: buyCount, product_id: product?._id as string },
 			{
@@ -79,6 +88,7 @@ export default function ProductDetail() {
 		);
 	};
 	const handleBuyNow = async () => {
+		requireLogin();
 		try {
 			const res = await addToCartMutation.mutateAsync({
 				buy_count: buyCount,
