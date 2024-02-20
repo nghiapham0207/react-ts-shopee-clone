@@ -27,6 +27,10 @@ export default function Login() {
 		setError,
 		formState: { errors },
 	} = useForm<FormData>({
+		defaultValues: {
+			email: "nghia@gmail.com",
+			password: "123456",
+		},
 		resolver: yupResolver(loginSchema),
 	});
 	const loginMutation = useMutation({
