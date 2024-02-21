@@ -10,6 +10,7 @@ import authApi from "../../apis/auth.api";
 import { purchasesStatus } from "../../constants/purchase";
 import { getAvatarUrl } from "../../utils/utils";
 import { locales } from "../../i18n/i18n";
+import { clearLS } from "../../utils/auth";
 
 export default function NavHeader() {
 	const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext);
@@ -20,9 +21,12 @@ export default function NavHeader() {
 	const logoutMutation = useMutation({
 		mutationFn: authApi.logout,
 		onSuccess: () => {
-			setIsAuthenticated(false);
-			setProfile(null);
+			console.log("OnSuccess");
+
 			queryClient.removeQueries({ queryKey: ["purchases", { status: purchasesStatus.inCart }] });
+			// setIsAuthenticated(false);
+			// setProfile(null);
+			clearLS();
 		},
 	});
 
@@ -88,7 +92,7 @@ export default function NavHeader() {
 								Tài khoản của tôi
 							</Link>
 							<Link
-								to="/"
+								to={path.historyPurchase}
 								className="block w-full bg-white px-4 py-3 text-left hover:bg-slate-100 hover:text-cyan-500">
 								Đơn mua
 							</Link>
@@ -104,7 +108,7 @@ export default function NavHeader() {
 						<img
 							src={getAvatarUrl(profile?.avatar)}
 							alt="avatar"
-							className="h-full w-full rounded-full object-cover"
+							className="h-full w-full rounded-full bg-white object-cover"
 						/>
 					</div>
 					<div className="max-w-[8rem] truncate">{profile?.email}</div>

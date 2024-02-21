@@ -96,7 +96,7 @@ export const schema = yup
 			message: "Giá cả không phù hợp",
 			test: testPriceRange,
 		}),
-		name: yup.string().trim().required("Tên sản phẩm là bắt buộc"),
+		name: yup.string().trim().required("Tên sản phẩm là bắt buộc").max(5, "Tối đa 128 ký tự!"),
 	})
 	.required();
 

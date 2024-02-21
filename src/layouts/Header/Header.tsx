@@ -14,6 +14,8 @@ import useSearchProducts from "../../hooks/useSearchProducts";
 
 const MAX_NUMBER = 5;
 
+const MAX_LENTH = 128;
+
 export default function Header() {
 	const { isAuthenticated } = useContext(AppContext);
 	const { register, onSubmitSearch } = useSearchProducts();
@@ -40,6 +42,7 @@ export default function Header() {
 						<div className="flex rounded-sm bg-white p-1">
 							<input
 								type="text"
+								maxLength={MAX_LENTH}
 								{...register("name")}
 								placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
 								className="flex-grow border-none bg-transparent px-3 py-2 text-black outline-none"

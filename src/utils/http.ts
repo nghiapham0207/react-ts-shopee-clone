@@ -14,6 +14,11 @@ import { URL_LOGIN, URL_REFRESH_TOKEN, URL_REGISTER } from "../apis/auth.api";
 import { isAxiosExpiredTokenError, isAxiosUnauthorizedError } from "./utils";
 import { ErrorResponse } from "../types/utils.type";
 
+const SECOND = 1;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
 class Http {
 	instance: AxiosInstance;
 	private accessToken: string;
@@ -29,8 +34,10 @@ class Http {
 			timeout: 10 * 1000,
 			headers: {
 				"Content-Type": "application/json",
-				"expire-access-token": 10,
-				"expire-refresh-token": 60 * 60,
+				// "expire-access-token": 10,
+				// "expire-refresh-token": 60 * 60,
+				"expire-access-token": DAY,
+				"expire-refresh-token": 7 * DAY,
 			},
 		});
 		this.instance.interceptors.request.use(
@@ -78,6 +85,11 @@ class Http {
 					const url = config?.url || "";
 					console.log(config);
 					if (isAxiosExpiredTokenError(error) && url !== URL_REFRESH_TOKEN) {
+						// toast("Token hết hạn!", {
+						// 	autoClose: 3000,
+						// 	position: "top-center",
+						// 	type: "warning",
+						// });
 						this.refreshTokenRequest = this.refreshTokenRequest
 							? this.refreshTokenRequest
 							: this.handleRefreshToken().finally(() => {
