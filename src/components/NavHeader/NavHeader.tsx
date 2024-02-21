@@ -13,7 +13,7 @@ import { locales } from "../../i18n/i18n";
 import { clearLS } from "../../utils/auth";
 
 export default function NavHeader() {
-	const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext);
+	const { isAuthenticated, profile } = useContext(AppContext);
 	const queryClient = useQueryClient();
 	const { i18n } = useTranslation();
 	const currentLng = locales[i18n.language as keyof typeof locales];
@@ -24,8 +24,6 @@ export default function NavHeader() {
 			console.log("OnSuccess");
 
 			queryClient.removeQueries({ queryKey: ["purchases", { status: purchasesStatus.inCart }] });
-			// setIsAuthenticated(false);
-			// setProfile(null);
 			clearLS();
 		},
 	});

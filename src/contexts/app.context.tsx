@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext, useCallback, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import { getAccessTokenFromLS, getProfileFromLS } from "../utils/auth";
 import { User } from "../types/user.type";
 import { IExtendedPurchase } from "../types/purchase.type";
