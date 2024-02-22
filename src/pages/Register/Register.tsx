@@ -18,6 +18,9 @@ import Button from "../../components/Button";
 type FormData = Pick<Schema, "email" | "password" | "confirm_password">;
 const registerSchema = schema.pick(["email", "password", "confirm_password"]);
 
+const MAX_LEN_EMAIL = 60;
+const MAX_LEN_PASSWORD = 160;
+
 export default function Register() {
 	const { setIsAuthenticated, setProfile } = useContext(AppContext);
 	const navigate = useNavigate();
@@ -76,6 +79,7 @@ export default function Register() {
 							<Input
 								name="email"
 								type="email"
+								maxLength={MAX_LEN_EMAIL}
 								register={register}
 								className="mt-8"
 								placeholder="Email"
@@ -85,6 +89,7 @@ export default function Register() {
 							<Input
 								name="password"
 								type="password"
+								maxLength={MAX_LEN_PASSWORD}
 								register={register}
 								className="mt-2"
 								placeholder="Password"
@@ -94,6 +99,7 @@ export default function Register() {
 							<Input
 								name="confirm_password"
 								type="password"
+								maxLength={MAX_LEN_PASSWORD}
 								register={register}
 								className="mt-2"
 								placeholder="Confirm password"

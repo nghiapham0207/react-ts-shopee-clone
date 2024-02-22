@@ -17,6 +17,9 @@ import useQueryParams from "../../hooks/useQueryParams";
 type FormData = Pick<Schema, "email" | "password">;
 const loginSchema = schema.pick(["email", "password"]);
 
+const MAX_LEN_EMAIL = 60;
+const MAX_LEN_PASSWORD = 160;
+
 export default function Login() {
 	const { setIsAuthenticated, setProfile } = useContext(AppContext);
 	const { next } = useQueryParams();
@@ -78,6 +81,7 @@ export default function Login() {
 							<Input
 								name="email"
 								type="email"
+								maxLength={MAX_LEN_EMAIL}
 								register={register}
 								className="mt-8"
 								placeholder="Email"
@@ -86,6 +90,7 @@ export default function Login() {
 							<Input
 								name="password"
 								type="password"
+								maxLength={MAX_LEN_PASSWORD}
 								register={register}
 								className="mt-3"
 								placeholder="Password"

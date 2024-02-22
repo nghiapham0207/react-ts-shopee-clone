@@ -10,10 +10,41 @@ import { ProductListConfig } from "../../types/product.type";
 import categoryApi from "../../apis/category.api";
 import useQueryConfig from "../../hooks/useQueryConfig";
 import ProductSkeleton from "./components/Product/ProductSkeleton";
+import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import path from "../../constants/path";
+
+const NoProductFound = () => {
+	const navigate = useNavigate();
+	const handleClearFilter = () => {
+		navigate({
+			pathname: path.home,
+		});
+	};
+	return (
+		<section>
+			<div className="my-20 flex flex-col items-center justify-center">
+				<img src="/public/images/no-product-found.png" alt="not-found" className="h-32 w-32" />
+				<div className="text-gray-400">
+					Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?
+				</div>
+				<div className="mt-2 text-gray-400">or</div>
+				<div className="mt-2">
+					<button
+						type="button"
+						onClick={handleClearFilter}
+						className="rounded-sm bg-orange px-5 py-4 font-light text-white">
+						Xóa bộ lọc
+					</button>
+				</div>
+			</div>
+		</section>
+	);
+};
 
 export default function ProductList() {
 	const queryConfig = useQueryConfig();
-	const { data: productsData } = useQuery({
+	const { data: productsData, isLoading } = useQuery({
 		queryKey: ["products", queryConfig],
 		queryFn: () => {
 			return productApi.getProducts(queryConfig as ProductListConfig);
@@ -30,37 +61,43 @@ export default function ProductList() {
 	});
 
 	return (
-		<div className="bg-gray-200 py-6">
+		<div className="bg-gray-100 py-6">
 			<Helmet>
 				<title>Shopee</title>
 				<meta name="description" content="Shopee - danh sách sản phẩm" />
 			</Helmet>
 			<div className="container">
 				<div className="grid grid-cols-12 gap-6">
-					<div className="col-span-3">
+					<div className="col-span-3 hidden md:block">
 						<AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
 					</div>
 					{productsData && (
-						<div className="col-span-9">
-							<SortProductList
-								queryConfig={queryConfig}
-								pageSize={productsData.data.data.pagination.page_size}
-							/>
-							<div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-								{productsData.data.data.products.map((product) => (
-									<div key={product._id} className="col-span-1">
-										<Product product={product} />
+						<div className="col-span-12 md:col-span-9">
+							{productsData.data.data.products.length > 0 ? (
+								<Fragment>
+									<SortProductList
+										queryConfig={queryConfig}
+										pageSize={productsData.data.data.pagination.page_size}
+									/>
+									<div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+										{productsData.data.data.products.map((product) => (
+											<div key={product._id} className="col-span-1">
+												<Product product={product} />
+											</div>
+										))}
 									</div>
-								))}
-							</div>
-							<Pagination
-								queryConfig={queryConfig}
-								pageSize={productsData.data.data.pagination.page_size}
-							/>
+									<Pagination
+										queryConfig={queryConfig}
+										pageSize={productsData.data.data.pagination.page_size}
+									/>
+								</Fragment>
+							) : (
+								<NoProductFound />
+							)}
 						</div>
 					)}
-					{!productsData && (
-						<div className="col-span-9 animate-pulse">
+					{!productsData && isLoading && (
+						<div className="col-span-12 animate-pulse md:col-span-9">
 							<div className="h-14 w-full rounded bg-gray-100"></div>
 							<div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 								{Array(10)

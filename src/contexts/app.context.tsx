@@ -39,7 +39,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 	const [profile, setProfile] = useState<User | null>(initialAppContext.profile);
 
 	const reset = () => {
-		console.log("Reset App");
 		setIsAuthenticated(false);
 		setExtendedPurchases([]);
 		setProfile(null);

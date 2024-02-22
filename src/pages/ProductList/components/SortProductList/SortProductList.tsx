@@ -7,20 +7,32 @@ import { ProductListConfig } from "../../../../types/product.type";
 import path from "../../../../constants/path";
 import { order as orderConstant } from "../../../../constants/product";
 import { QueryConfig } from "../../../../hooks/useQueryConfig";
+import { Fragment, useEffect, useState } from "react";
 
 interface SortProductListProps {
 	queryConfig: QueryConfig;
 	pageSize: number;
 }
 
+type TSortByValue = Exclude<ProductListConfig["sort_by"], undefined>;
+type TOrderValue = Exclude<ProductListConfig["order"], undefined>;
+
+const prefixOption = {
+	sortBy: "sortby-",
+	order: "order-",
+};
+
 export default function SortProductList({ queryConfig, pageSize }: SortProductListProps) {
+	const mediaQuery = window.matchMedia("(min-width: 1024px)");
+	const [lgScreen, setLgScreen] = useState(mediaQuery.matches);
 	const page = Number(queryConfig.page);
 	const { sort_by = sortBy.createdAt, order } = queryConfig;
 	const navigate = useNavigate();
-	const isActiveSortBy = (sortByValue: Exclude<ProductListConfig["sort_by"], undefined>) => {
+	const isActiveSortBy = (sortByValue: TSortByValue) => {
 		return sort_by === sortByValue;
 	};
-	const handleSort = (sortByValue: Exclude<ProductListConfig["sort_by"], undefined>) => {
+
+	const handleSort = (sortByValue: TSortByValue) => {
 		navigate({
 			pathname: path.home,
 			search: createSearchParams(
@@ -34,7 +46,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 			).toString(),
 		});
 	};
-	const handlePriceOrder = (orderValue: Exclude<ProductListConfig["order"], undefined>) => {
+	const handlePriceOrder = (orderValue: TOrderValue) => {
 		navigate({
 			pathname: path.home,
 			search: createSearchParams({
@@ -44,57 +56,104 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 			}).toString(),
 		});
 	};
+
+	useEffect(() => {
+		const handleChangeScreen = () => {
+			setLgScreen(mediaQuery.matches);
+		};
+		mediaQuery.addEventListener("change", handleChangeScreen);
+		return () => {
+			mediaQuery.removeEventListener("change", handleChangeScreen);
+		};
+	}, [mediaQuery]);
 	return (
-		<div className="bg-gray-300/40 px-3 py-4">
+		<div className="bg-gray-300/40 px-3 py-2 md:py-4">
 			<div className="flex flex-wrap items-center justify-between gap-2">
-				<div className="flex flex-wrap items-center gap-2">
-					<div>Sắp xếp theo</div>
-					<button
-						className={classNames("h-8 px-4 text-center  text-sm  capitalize", {
-							"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.view),
-							"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.view),
-						})}
-						onClick={() => handleSort(sortBy.view)}>
-						phổ biến
-					</button>
-					<button
-						className={classNames("h-8 px-4 text-center  text-sm  capitalize", {
-							"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.createdAt),
-							"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.createdAt),
-						})}
-						onClick={() => handleSort(sortBy.createdAt)}>
-						mới nhất
-					</button>
-					<button
-						className={classNames("h-8 px-4 text-center  text-sm  capitalize", {
-							"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.sold),
-							"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.sold),
-						})}
-						onClick={() => handleSort(sortBy.sold)}>
-						bán chạy
-					</button>
-					<select
-						aria-labelledby="price of product"
-						className={classNames("h-8 bg-white px-4 text-left text-sm capitalize outline-none", {
-							"text-orange": isActiveSortBy(sortBy.price),
-							"text-black": !isActiveSortBy(sortBy.price),
-						})}
-						value={order || ""}
-						onChange={(event) => {
-							handlePriceOrder(
-								event.target.value as Exclude<ProductListConfig["order"], undefined>,
-							);
-						}}>
-						<option className="text-black" value="" disabled>
-							Giá
-						</option>
-						<option className="text-black" value={orderConstant.asc}>
-							Giá: thấp đến cao
-						</option>
-						<option className="text-black" value={orderConstant.desc}>
-							Giá: cao đến thấp
-						</option>
-					</select>
+				<div className="flex flex-wrap items-center gap-2 [&>button]:text-xs md:[&>button]:text-sm [&>select]:text-xs md:[&>select]:text-sm">
+					<div className="text-xs md:text-sm">Sắp xếp theo</div>
+					{lgScreen && (
+						<Fragment>
+							<button
+								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.view),
+									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.view),
+								})}
+								onClick={() => handleSort(sortBy.view)}>
+								phổ biến
+							</button>
+							<button
+								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.createdAt),
+									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.createdAt),
+								})}
+								onClick={() => handleSort(sortBy.createdAt)}>
+								mới nhất
+							</button>
+							<button
+								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.sold),
+									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.sold),
+								})}
+								onClick={() => handleSort(sortBy.sold)}>
+								bán chạy
+							</button>
+							<select
+								aria-labelledby="price of product"
+								className={classNames(
+									"text-lef h-8 bg-white px-2 capitalize outline-none md:px-4",
+									{
+										"text-orange": isActiveSortBy(sortBy.price),
+										"text-black": !isActiveSortBy(sortBy.price),
+									},
+								)}
+								value={order || ""}
+								onChange={(event) => {
+									handlePriceOrder(event.target.value as TOrderValue);
+								}}>
+								<option className="text-black" value="" disabled>
+									Giá
+								</option>
+								<option className="text-black" value={orderConstant.asc}>
+									Giá: thấp đến cao
+								</option>
+								<option className="text-black" value={orderConstant.desc}>
+									Giá: cao đến thấp
+								</option>
+							</select>
+						</Fragment>
+					)}
+					{!lgScreen && (
+						<select
+							className="h-8 px-2 text-left capitalize focus:outline-orange"
+							onChange={(evt) => {
+								const array = evt.target.value.split("-");
+								const prefix = array[0] + "-";
+								const value = array[1];
+								if (prefix === prefixOption.sortBy) {
+									handleSort(value as TSortByValue);
+								} else if (prefix === prefixOption.order) {
+									handlePriceOrder(value as TOrderValue);
+								}
+							}}>
+							<option
+								className="h-8 px-2 py-2 capitalize"
+								value={prefixOption.sortBy + sortBy.view}>
+								phổ biến
+							</option>
+							<option
+								className="h-8 px-2 py-2 capitalize"
+								value={prefixOption.sortBy + sortBy.createdAt}>
+								mới nhất
+							</option>
+							<option
+								className="h-8 px-2 py-2 capitalize"
+								value={prefixOption.sortBy + sortBy.sold}>
+								bán chạy
+							</option>
+							<option value={prefixOption.order + orderConstant.asc}>giá tăng dần</option>
+							<option value={prefixOption.order + orderConstant.desc}>giá giảm dần</option>
+						</select>
+					)}
 				</div>
 				<div className="flex items-center">
 					<div>

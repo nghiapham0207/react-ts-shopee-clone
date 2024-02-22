@@ -21,6 +21,8 @@ interface AsideFilterProps {
 	queryConfig: QueryConfig;
 }
 
+const MAX_LEN_INPUT_PRICE = 13;
+
 type FormData = NoUndefinedField<Pick<Schema, "price_max" | "price_min">>;
 // type FormData = Pick<Schema, "price_max" | "price_min">;
 
@@ -150,6 +152,7 @@ export default function AsideFilter({ categories, queryConfig }: AsideFilterProp
 								return (
 									<InputNumber
 										type="text"
+										maxLength={MAX_LEN_INPUT_PRICE}
 										className="grow"
 										placeholder="₫ TỪ"
 										classNameError="hidden"
@@ -163,18 +166,6 @@ export default function AsideFilter({ categories, queryConfig }: AsideFilterProp
 								);
 							}}
 						/>
-						{/* <InputV2
-							type="number"
-							name="price_min"
-							control={control}
-							className="grow"
-							placeholder="₫ TỪ"
-							classNameError="hidden"
-							classNameInput="p-1 w-full outline-none border border-gray-300 focus:border-gray-500 focus:shadow-sm rounded-sm"
-							onChange={() => {
-								trigger("price_max");
-							}}
-						/> */}
 						<div className="mx-2 my-2 shrink-0">-</div>
 						<Controller
 							name="price_max"
@@ -183,6 +174,7 @@ export default function AsideFilter({ categories, queryConfig }: AsideFilterProp
 								return (
 									<InputNumber
 										type="text"
+										maxLength={MAX_LEN_INPUT_PRICE}
 										className="grow"
 										placeholder="₫ ĐẾN"
 										classNameError="hidden"
