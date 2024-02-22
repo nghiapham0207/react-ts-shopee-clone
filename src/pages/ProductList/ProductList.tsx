@@ -68,18 +68,18 @@ export default function ProductList() {
 			</Helmet>
 			<div className="container">
 				<div className="grid grid-cols-12 gap-6">
-					<div className="col-span-3 hidden md:block">
+					<div className="col-span-4 hidden sm:col-span-4 sm:block md:col-span-3">
 						<AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
 					</div>
 					{productsData && (
-						<div className="col-span-12 md:col-span-9">
+						<div className="col-span-12 sm:col-span-8 md:col-span-9">
 							{productsData.data.data.products.length > 0 ? (
 								<Fragment>
 									<SortProductList
 										queryConfig={queryConfig}
 										pageSize={productsData.data.data.pagination.page_size}
 									/>
-									<div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+									<div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 										{productsData.data.data.products.map((product) => (
 											<div key={product._id} className="col-span-1">
 												<Product product={product} />

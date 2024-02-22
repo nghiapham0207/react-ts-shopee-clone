@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
-import NavHeader from "../NavHeader";
+import NavHeader from "../../layouts/Header/components/NavHeader";
 import path from "../../constants/path";
 import useSearchProducts from "../../hooks/useSearchProducts";
+import NavHeaderMobile from "../../layouts/Header/components/NavHeaderMobile";
 
 export default function CartHeader() {
 	const { register, onSubmitSearch } = useSearchProducts();
@@ -11,12 +12,13 @@ export default function CartHeader() {
 			<div className="bg-orange text-white">
 				<div className="container">
 					<NavHeader />
+					<NavHeaderMobile />
 				</div>
 			</div>
 			<div className="bg-white py-6">
 				<div className="container">
-					<nav className="md:flex md:items-end md:justify-between">
-						<Link to={path.home} className="flex flex-shrink-0 items-end">
+					<nav className="sm:flex sm:items-end sm:justify-between">
+						<Link to={path.home} className="hidden sm:flex sm:flex-shrink-0 sm:items-end">
 							<div>
 								<svg viewBox="0 0 192 65" className="h-8 fill-orange md:h-10 lg:h-11">
 									<g fillRule="evenodd">
@@ -27,7 +29,7 @@ export default function CartHeader() {
 							<div className="mx-4 h-6 w-[1px] bg-orange md:h-8"></div>
 							<div className="capitalize text-orange md:text-xl">giỏ hàng</div>
 						</Link>
-						<form className="mt-10 md:mt-0 md:w-[50%]" onSubmit={onSubmitSearch}>
+						<form className="md:mt-0 md:w-[50%]" onSubmit={onSubmitSearch}>
 							<div className="flex rounded-sm border-2 border-orange">
 								<input
 									type="text"

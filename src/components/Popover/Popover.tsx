@@ -68,7 +68,10 @@ export default function Popover({
 					{open && (
 						<FloatingPortal id={id}>
 							<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-								<div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+								<div
+									ref={refs.setFloating}
+									style={{ zIndex: 100, ...floatingStyles }}
+									{...getFloatingProps()}>
 									<FloatingArrow ref={arrowRef} context={context} fill="white" />
 									{renderPopover}
 								</div>

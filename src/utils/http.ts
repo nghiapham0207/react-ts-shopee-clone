@@ -83,7 +83,6 @@ class Http {
 				if (isAxiosUnauthorizedError<ErrorResponse<{ name: string; message: string }>>(error)) {
 					const config = error.response?.config;
 					const url = config?.url || "";
-					console.log(config);
 					if (isAxiosExpiredTokenError(error) && url !== URL_REFRESH_TOKEN) {
 						// toast("Token hết hạn!", {
 						// 	autoClose: 3000,

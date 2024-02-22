@@ -11,11 +11,8 @@ function App() {
 	const { reset } = useContext(AppContext);
 
 	useEffect(() => {
-		console.log("App");
 		LocalStorageEventTarget.addEventListener("clearLS", reset);
 		return () => {
-			console.log("Clean App");
-
 			LocalStorageEventTarget.removeEventListener("clearLS", reset);
 		};
 	}, [reset]);
