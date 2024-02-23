@@ -36,9 +36,9 @@ export default function DateSelection({ value, onChange, errorMessage }: Props) 
 		}
 	}, [value]);
 	return (
-		<div className="mt-2 flex flex-wrap sm:flex-row">
-			<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right">Ngày sinh</div>
-			<div className="sm:w-[80%] sm:pl-5">
+		<div className="mt-2 flex flex-col flex-wrap lg:flex-row">
+			<div className="truncate pt-3 capitalize lg:w-[20%] lg:text-right">Ngày sinh</div>
+			<div className="lg:w-[80%] lg:pl-5">
 				<div className="flex justify-between">
 					<select
 						onChange={handleChange}

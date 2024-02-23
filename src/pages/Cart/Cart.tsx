@@ -148,7 +148,7 @@ export default function Cart() {
 							<div className="min-w-[1000px]">
 								{/* header */}
 								<div className="grid grid-cols-12 rounded-sm bg-white px-9 py-5 text-sm capitalize text-gray-500 shadow">
-									<div className="col-span-6">
+									<div className="col-span-5 lg:col-span-6">
 										<div className="flex items-center">
 											<div className="flex flex-shrink-0 items-center justify-center pr-3">
 												<input
@@ -161,10 +161,10 @@ export default function Cart() {
 											<div className="flex-grow capitalize text-black">sản phẩm</div>
 										</div>
 									</div>
-									<div className="col-span-6">
-										<div className="grid grid-cols-5 text-center capitalize">
-											<div className="col-span-2">đơn giá</div>
-											<div className="col-span-1">số lượng</div>
+									<div className="col-span-7 lg:col-span-6">
+										<div className="grid grid-cols-7 text-center capitalize lg:grid-cols-5">
+											<div className="col-span-3 lg:col-span-2">đơn giá</div>
+											<div className="col-span-2 lg:col-span-1">số lượng</div>
 											<div className="col-span-1">số tiền</div>
 											<div className="col-span-1">thao tác</div>
 										</div>
@@ -177,7 +177,7 @@ export default function Cart() {
 											<div
 												className="mt-4 grid grid-cols-12 items-center rounded-sm border border-gray-200 bg-white px-4 py-5 text-center text-sm text-gray-500 first:mt-0"
 												key={purchase._id}>
-												<div className="col-span-6">
+												<div className="col-span-5 lg:col-span-6">
 													<div className="flex">
 														<div className="flex flex-shrink-0 items-center justify-center pr-3">
 															<input
@@ -211,9 +211,9 @@ export default function Cart() {
 														</div>
 													</div>
 												</div>
-												<div className="col-span-6">
-													<div className="grid grid-cols-5 items-center">
-														<div className="col-span-2">
+												<div className="col-span-7 lg:col-span-6">
+													<div className="grid grid-cols-7 items-center lg:grid-cols-5">
+														<div className="col-span-3 lg:col-span-2">
 															<div className="flex items-center justify-center">
 																<span className="text-gray-300 line-through">
 																	{"₫" + formatCurrency(purchase.product.price_before_discount)}
@@ -223,7 +223,7 @@ export default function Cart() {
 																</span>
 															</div>
 														</div>
-														<div className="col-span-1">
+														<div className="col-span-2 flex justify-center lg:col-span-1">
 															<QuantityController
 																classNameWrapper="flex items-center"
 																max={purchase.product.quantity}
@@ -273,7 +273,7 @@ export default function Cart() {
 							</div>
 						</div>
 						{/* footer */}
-						<div className="sticky bottom-0 z-10 mt-10 flex flex-col rounded-sm border border-gray-100 bg-white p-5 shadow sm:flex-row sm:items-center">
+						<div className="sticky bottom-0 z-10 mt-10 flex flex-col rounded-sm border border-gray-100 bg-white p-2 shadow sm:flex-row sm:items-center md:p-5">
 							<div className="flex items-center">
 								<div className="flex flex-shrink-0 items-center justify-center pr-3">
 									<input
@@ -283,7 +283,10 @@ export default function Cart() {
 										onChange={handleCheckAll}
 									/>
 								</div>
-								<button type="button" className="mx-3 border-none bg-none" onClick={handleCheckAll}>
+								<button
+									type="button"
+									className="mx-3 border-none bg-none text-xs md:text-base"
+									onClick={handleCheckAll}>
 									{`Chọn tất cả (${extendedPurchases.length})`}
 								</button>
 								<button
@@ -293,11 +296,11 @@ export default function Cart() {
 									Xóa
 								</button>
 							</div>
-							<div className="mt-5 flex flex-col sm:ml-auto sm:mt-0 sm:flex-row sm:items-center">
+							<div className="mt-5 flex flex-col sm:ml-auto sm:mt-0 md:flex-row md:items-center">
 								<div>
 									<div className="flex items-center sm:justify-end">
-										<div>{`Tổng thanh toán (${checkedPurchasesCount} sản phẩm):`}</div>
-										<div className="ml-2 text-2xl text-orange">{`₫${formatCurrency(
+										<div className="text-xs md:text-base">{`Tổng thanh toán (${checkedPurchasesCount} sản phẩm):`}</div>
+										<div className="ml-2 text-sm text-orange md:text-2xl">{`₫${formatCurrency(
 											totalPriceOfCheckedPurchases,
 										)}`}</div>
 									</div>
@@ -312,7 +315,7 @@ export default function Cart() {
 									type="button"
 									onClick={handleBuyProducts}
 									disabled={buyProductsMutation.isPending}
-									className="ml-4 mt-5 flex h-10 w-52 items-center justify-center bg-red-500 capitalize text-white hover:bg-red-600 sm:mt-0">
+									className="mt-5 flex h-10 w-full items-center justify-center bg-red-500 capitalize text-white hover:bg-red-600 sm:mt-0 md:ml-4 md:max-w-[150px] lg:w-52">
 									Mua Hàng
 								</Button>
 							</div>

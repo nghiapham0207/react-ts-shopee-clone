@@ -64,7 +64,7 @@ export default function ChangePassword() {
 			</div>
 			<form onSubmit={onSubmit} className="mr-auto mt-8 max-w-2xl">
 				<div className="mt-6 grow md:mt-0 md:pr-12">
-					<div className="mt-2 flex flex-wrap sm:flex-row">
+					<div className="mt-2 flex flex-col flex-wrap sm:flex-row">
 						<div className="truncate pt-3 capitalize sm:w-[30%] sm:text-right">Mật khẩu cũ</div>
 						<div className="sm:w-[70%] sm:pl-5">
 							<Input
@@ -78,7 +78,7 @@ export default function ChangePassword() {
 							/>
 						</div>
 					</div>
-					<div className="mt-2 flex flex-wrap sm:flex-row">
+					<div className="mt-2 flex flex-col flex-wrap sm:flex-row">
 						<div className="truncate pt-3 capitalize sm:w-[30%] sm:text-right">Mật khẩu mới</div>
 						<div className="sm:w-[70%] sm:pl-5">
 							<Input
@@ -92,7 +92,7 @@ export default function ChangePassword() {
 							/>
 						</div>
 					</div>
-					<div className="mt-2 flex flex-wrap sm:flex-row">
+					<div className="mt-2 flex flex-col flex-wrap sm:flex-row">
 						<div className="truncate pt-3 capitalize sm:w-[30%] sm:text-right">
 							Xác nhận mật khẩu mới
 						</div>
@@ -108,7 +108,7 @@ export default function ChangePassword() {
 							/>
 						</div>
 					</div>
-					<div className="mt-2 flex flex-wrap sm:flex-row">
+					<div className="mt-2 flex flex-col flex-wrap sm:flex-row">
 						<div className="truncate pt-3 capitalize sm:w-[30%] sm:text-right"></div>
 						<div className="sm:w-[70%] sm:pl-5">
 							<Button

@@ -10,6 +10,7 @@ import { purchasesStatus } from "../../../../constants/purchase";
 import { getAvatarUrl } from "../../../../utils/utils";
 import { clearLS } from "../../../../utils/auth";
 import LanguageSwitcher from "../LanguageSwitcher";
+import Avatar from "../../../../components/Avatar";
 
 export default function NavHeader() {
 	const { isAuthenticated, profile } = useContext(AppContext);
@@ -54,12 +55,8 @@ export default function NavHeader() {
 						</div>
 					}>
 					<div className="mr-2 h-6 w-6 flex-shrink-0">
-						<img
+						<Avatar
 							src={getAvatarUrl(profile?.avatar)}
-							onError={(evt) => {
-								evt.currentTarget.src = "/images/default-avatar.jpg";
-							}}
-							alt="avatar"
 							className="h-full w-full rounded-full bg-white object-cover"
 						/>
 					</div>

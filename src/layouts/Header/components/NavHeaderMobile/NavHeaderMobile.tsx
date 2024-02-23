@@ -9,6 +9,7 @@ import { clearLS } from "../../../../utils/auth";
 import { purchasesStatus } from "../../../../constants/purchase";
 import { getAvatarUrl } from "../../../../utils/utils";
 import useShowModal from "../../../../hooks/useShowModal";
+import Avatar from "../../../../components/Avatar";
 
 export default function NavHeaderMobile() {
 	const navigate = useNavigate();
@@ -71,12 +72,8 @@ export default function NavHeaderMobile() {
 										<div className="w-full bg-white px-4 py-3 text-left">
 											<div className="flex items-center">
 												<div className="mr-2 h-12 w-12 flex-shrink-0">
-													<img
+													<Avatar
 														src={getAvatarUrl(profile?.avatar)}
-														onError={(evt) => {
-															evt.currentTarget.src = "/images/default-avatar.jpg";
-														}}
-														alt="avatar"
 														className="h-full w-full rounded-full border bg-white object-cover"
 													/>
 												</div>

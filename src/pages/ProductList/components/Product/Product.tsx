@@ -15,7 +15,8 @@ export default function Product({ product }: ProductProps) {
 			<div className="overflow-hidden rounded-sm bg-white shadow transition-transform duration-100 hover:translate-y-[-0.03rem] hover:shadow-md">
 				<div className="relative w-full pt-[100%]">
 					<img
-						className="absolute left-0 top-0 h-full w-full bg-white object-cover"
+						className="absolute left-0 top-0 h-full w-full bg-white bg-gradient-to-tr object-cover"
+						loading="lazy"
 						src={product.image}
 						alt={product.name}
 					/>

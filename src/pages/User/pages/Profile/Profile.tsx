@@ -15,11 +15,13 @@ import { setProfileToLS } from "../../../../utils/auth";
 import { getAvatarUrl, isAxiosUnprocessableEntityError } from "../../../../utils/utils";
 import { ErrorResponse } from "../../../../types/utils.type";
 import InputFile from "../../../../components/InputFile";
+import Avatar from "../../../../components/Avatar";
 
 type FormData = Pick<UserSchema, "name" | "avatar" | "phone" | "date_of_birth" | "address">;
 type FormDataError = Omit<FormData, "date_of_birth"> & { date_of_birth?: string };
 const profileSchema = userSchema.pick(["name", "address", "avatar", "phone", "date_of_birth"]);
 
+// test FormProvider
 function Infor() {
 	const {
 		register,
@@ -28,9 +30,9 @@ function Infor() {
 	} = useFormContext<FormData>();
 	return (
 		<Fragment>
-			<div className="mt-6 flex flex-wrap sm:flex-row">
-				<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right">Tên</div>
-				<div className="sm:w-[80%] sm:pl-5">
+			<div className="mt-2 flex flex-col flex-wrap sm:mt-6 lg:flex-row">
+				<div className="truncate pt-3 capitalize lg:w-[20%] lg:text-right">Tên</div>
+				<div className="lg:w-[80%] lg:pl-5">
 					<Input
 						register={register}
 						name="name"
@@ -41,9 +43,9 @@ function Infor() {
 					/>
 				</div>
 			</div>
-			<div className="mt-2 flex flex-wrap sm:flex-row">
-				<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right">Số điện thoại</div>
-				<div className="sm:w-[80%] sm:pl-5">
+			<div className="mt-2 flex flex-col flex-wrap lg:flex-row">
+				<div className="truncate pt-3 capitalize lg:w-[20%] lg:text-right">Số điện thoại</div>
+				<div className="lg:w-[80%] lg:pl-5">
 					<Controller
 						control={control}
 						name="phone"
@@ -153,26 +155,27 @@ export default function Profile() {
 	};
 
 	return (
-		<div className="rounded-sm bg-white px-2 pb-10 shadow md:px-7 md:pb-20">
+		<div className="rounded-sm bg-white px-2 pb-10 shadow md:px-4 md:pb-20">
 			<div className="border-b border-b-gray-200 py-6">
 				<h1 className="text-lg font-medium capitalize text-gray-900">Hồ Sơ Của Tôi</h1>
 				<div className="mt-1 text-sm text-gray-700">
 					Quản lý thông tin hồ sơ để bảo mật tài khoản
 				</div>
 			</div>
+			{/* FormProvider helps consuming components to subcribe context */}
 			<FormProvider {...methods}>
 				<form onSubmit={onSubmit} className="mt-8 flex flex-col-reverse md:flex-row md:items-start">
-					<div className="mt-6 grow md:mt-0 md:pr-12">
-						<div className="flex flex-wrap sm:flex-row">
-							<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right">Email</div>
-							<div className="sm:w-[80%] sm:pl-5">
+					<div className="mt-6 grow md:mt-0 md:pr-6 lg:pr-12">
+						<div className="flex flex-col flex-wrap lg:flex-row">
+							<div className="truncate pt-3 capitalize lg:w-[20%] lg:text-right">Email</div>
+							<div className="lg:w-[80%] lg:pl-5">
 								<div className="pt-3 text-gray-700">{profile?.email}</div>
 							</div>
 						</div>
 						<Infor />
-						<div className="mt-2 flex flex-wrap sm:flex-row">
-							<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right">Địa chỉ</div>
-							<div className="sm:w-[80%] sm:pl-5">
+						<div className="mt-2 flex flex-col flex-wrap lg:flex-row">
+							<div className="truncate pt-3 capitalize lg:w-[20%] lg:text-right">Địa chỉ</div>
+							<div className="lg:w-[80%] lg:pl-5">
 								<Input
 									register={register}
 									name="address"
@@ -194,25 +197,21 @@ export default function Profile() {
 								/>
 							)}
 						/>
-						<div className="mt-2 flex flex-wrap sm:flex-row">
+						<div className="mt-2 flex flex-col lg:flex-row">
 							<div className="truncate pt-3 capitalize sm:w-[20%] sm:text-right"></div>
-							<div className="sm:w-[80%] sm:pl-5">
+							<div className="w-full lg:w-[80%] lg:pl-5">
 								<Button
 									type="submit"
-									className="flex h-9 items-center rounded-sm bg-orange px-5 text-center text-sm text-white hover:bg-orange/80">
+									className="flex h-9 w-full items-center justify-center rounded-sm bg-orange px-5 text-center text-sm text-white hover:bg-orange/80">
 									Lưu
 								</Button>
 							</div>
 						</div>
 					</div>
-					<div className="flex justify-center  md:w-72 md:border-l md:border-l-gray-200">
+					<div className="flex justify-center md:w-52 md:border-l md:border-l-gray-200 lg:w-72">
 						<div className="flex flex-col items-center">
 							<div className="my-5 h-24 w-24">
-								<img
-									src={previewImage || getAvatarUrl(avatar)}
-									alt=""
-									className="h-full w-full rounded-full object-cover"
-								/>
+								<Avatar src={previewImage || getAvatarUrl(avatar)} />
 							</div>
 							<InputFile onChange={handleChangeFile} />
 							<div className="mt-3 text-gray-400">

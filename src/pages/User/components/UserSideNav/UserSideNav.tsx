@@ -5,6 +5,7 @@ import path from "../../../../constants/path";
 import { AppContext } from "../../../../contexts/app.context";
 import { getAvatarUrl } from "../../../../utils/utils";
 import classNames from "classnames";
+import Avatar from "../../../../components/Avatar";
 
 export default function UserSideNav() {
 	const { profile } = useContext(AppContext);
@@ -14,15 +15,11 @@ export default function UserSideNav() {
 				<Link
 					to={path.profile}
 					className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-black/10">
-					<img
-						src={getAvatarUrl(profile?.avatar)}
-						alt="image"
-						className="h-full w-full object-cover"
-					/>
+					<Avatar src={getAvatarUrl(profile?.avatar)} className="h-full w-full object-cover" />
 				</Link>
 				<div className="grow pl-4">
 					<div
-						className="mb-1 max-w-[120px] truncate font-semibold text-gray-600"
+						className="mb-1 max-w-[120px] font-semibold text-gray-600 md:truncate"
 						title={profile?.email}>
 						{profile?.email}
 					</div>
@@ -43,7 +40,7 @@ export default function UserSideNav() {
 					</Link>
 				</div>
 			</div>
-			<div className="mt-7 [&_a:first-child]:mt-0 [&_a]:mt-4">
+			<div className="mt-7 flex items-center overflow-x-auto md:flex-col md:items-start md:[&_a:first-child]:ml-0 md:[&_a:first-child]:mt-0 [&_a]:ml-4 md:[&_a]:ml-0 md:[&_a]:mt-4">
 				<NavLink
 					to={path.profile}
 					className={({ isActive }) =>
@@ -59,7 +56,7 @@ export default function UserSideNav() {
 							className="h-full w-full"
 						/>
 					</div>
-					Tài khoản của tôi
+					<p className="text-xs md:text-base">Tài khoản của tôi</p>
 				</NavLink>
 				<NavLink
 					to={path.changePassword}
@@ -76,7 +73,7 @@ export default function UserSideNav() {
 							className="h-full w-full"
 						/>
 					</div>
-					Đổi mật khẩu
+					<p className="text-xs md:text-base">Đổi mật khẩu</p>
 				</NavLink>
 				<NavLink
 					to={path.historyPurchase}
@@ -93,7 +90,7 @@ export default function UserSideNav() {
 							className="h-full w-full"
 						/>
 					</div>
-					Đơn Mua
+					<p className="text-xs md:text-base">Đơn Mua</p>
 				</NavLink>
 			</div>
 		</div>

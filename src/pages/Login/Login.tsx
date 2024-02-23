@@ -74,8 +74,8 @@ export default function Login() {
 				<meta name="description" content="Shopee - Đăng nhập" />
 			</Helmet>
 			<div className="container">
-				<div className="grid grid-cols-1 py-6 lg:grid-cols-5 lg:py-12 lg:pr-10">
-					<div className="lg:col-span-2 lg:col-start-4">
+				<div className="grid grid-cols-1 py-6 sm:grid-cols-2 lg:grid-cols-5 lg:py-12 lg:pr-10">
+					<div className="sm:col-span-1 sm:col-start-2 lg:col-span-2 lg:col-start-4">
 						<form className="rounded bg-white p-10 shadow-sm" onSubmit={onSubmit} noValidate>
 							<div className="text-2xl">Đăng nhập</div>
 							<Input

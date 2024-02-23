@@ -162,9 +162,9 @@ export default function ProductDetail() {
 	return (
 		<div className="bg-gray-200 py-6">
 			<div className="container">
-				<div className="bg-white p-4 shadow">
-					<div className="grid grid-cols-12 gap-9">
-						<div className="col-span-5">
+				<div className="bg-white p-2 shadow sm:p-4">
+					<div className="flex flex-col gap-6 lg:grid lg:grid-rows-2 lg:gap-9 xl:grid-cols-12 xl:grid-rows-none">
+						<div className="lg:row-span-1 xl:col-span-5">
 							<div
 								className="relative w-full overflow-hidden pt-[100%] shadow hover:cursor-zoom-in"
 								onMouseMove={handleZoom}
@@ -236,7 +236,7 @@ export default function ProductDetail() {
 								</button>
 							</div>
 						</div>
-						<div className="col-span-7">
+						<div className="lg:row-span-1 xl:col-span-7">
 							<h1 className="text-xl font-medium capitalize">{product.name}</h1>
 							<div className="mt-3 flex items-center">
 								<div className="flex items-center">
@@ -253,35 +253,39 @@ export default function ProductDetail() {
 									<span className="ml-1 capitalize text-gray-500">Đã bán</span>
 								</div>
 							</div>
-							<div className="mt-8 flex items-center bg-gray-50 px-5 py-4">
-								<div className="text-gray-500 line-through">
+							{/* discount */}
+							<div className="mt-8 flex items-center bg-gray-50 px-2 py-2 md:px-5 md:py-4">
+								<div className="text-xs text-gray-500 line-through sm:text-base">
 									{"₫" + formatCurrency(product.price_before_discount)}
 								</div>
-								<div className="ml-3 text-3xl font-medium text-orange">
+								<div className="ml-3 text-sm font-medium text-orange sm:text-xl md:text-3xl">
 									{"₫" + formatCurrency(product.price)}
 								</div>
 								<div className="ml-4 rounded-sm bg-orange px-1 py-[2px] text-xs font-semibold uppercase text-white">
 									{rateSale(product.price_before_discount, product.price) + " giảm"}
 								</div>
 							</div>
-							<div className="mt-8 flex items-center">
-								<div className="capitalize text-gray-500">số lượng</div>
-								<QuantityController
-									onDecrease={handleBuyCount}
-									onIncrease={handleBuyCount}
-									onType={handleBuyCount}
-									value={buyCount}
-									max={product.quantity}
-								/>
-								<div className="ml-6 text-sm text-gray-500">
-									{product.quantity} {t("available products")}
+							{/* end discount */}
+							<div className="mt-8 flex items-start sm:items-center">
+								<div className="text-xs capitalize text-gray-500 sm:text-base">số lượng</div>
+								<div className="flex flex-col justify-end sm:flex-row sm:items-center">
+									<QuantityController
+										onDecrease={handleBuyCount}
+										onIncrease={handleBuyCount}
+										onType={handleBuyCount}
+										value={buyCount}
+										max={product.quantity}
+									/>
+									<div className="ml-10 mt-2 text-xs text-gray-500 sm:ml-6 sm:mt-0 sm:text-sm">
+										{product.quantity} {t("available products")}
+									</div>
 								</div>
 							</div>
 							<div className="mt-8 flex items-center">
 								<button
 									type="button"
 									onClick={addToCart}
-									className="flex h-12 items-center justify-center rounded-sm border border-orange bg-orange/10 px-5 capitalize text-orange shadow-sm hover:bg-orange/5">
+									className="flex h-10 items-center justify-center rounded-sm border border-orange bg-orange/10 px-5 text-xs capitalize text-orange shadow-sm hover:bg-orange/5 sm:h-12 sm:text-base">
 									<svg
 										enableBackground="new 0 0 15 15"
 										viewBox="0 0 15 15"
@@ -325,7 +329,7 @@ export default function ProductDetail() {
 								<button
 									type="button"
 									onClick={handleBuyNow}
-									className="ml-4 flex h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 capitalize text-white shadow-sm outline-none hover:bg-orange/90">
+									className="ml-4 flex h-10 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-5 text-xs capitalize text-white shadow-sm outline-none hover:bg-orange/90 sm:h-12 sm:text-base">
 									mua ngay
 								</button>
 							</div>

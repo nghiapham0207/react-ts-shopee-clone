@@ -56,7 +56,7 @@ export default function QuantityController({
 		<div className={"flex items-center " + classNameWrapper}>
 			<button
 				onClick={decrease}
-				className="flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600">
+				className="flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 px-2 text-gray-600">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -78,7 +78,7 @@ export default function QuantityController({
 			/>
 			<button
 				onClick={increase}
-				className="flex h-8 w-8 items-center justify-center rounded-r-sm border border-gray-300 text-gray-600">
+				className="flex h-8 w-8 items-center justify-center rounded-r-sm border border-gray-300 px-2 text-gray-600">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
