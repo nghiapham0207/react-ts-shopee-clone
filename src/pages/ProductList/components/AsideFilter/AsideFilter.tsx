@@ -8,18 +8,14 @@ import { Link, createSearchParams, useNavigate } from "react-router-dom";
 
 import path from "../../../../constants/path";
 import Button from "../../../../components/Button";
-import { Category } from "../../../../types/category.type";
 import InputNumber from "../../../../components/InputNumber";
 import { schema, Schema } from "../../../../utils/rules";
 import { NoUndefinedField } from "../../../../types/utils.type";
 import RatingStars from "../RatingStars";
-import { QueryConfig } from "../../../../hooks/useQueryConfig";
+import useQueryConfig from "../../../../hooks/useQueryConfig";
 import { useTranslation } from "react-i18next";
-
-interface AsideFilterProps {
-	categories: Category[];
-	queryConfig: QueryConfig;
-}
+import { useQuery } from "@tanstack/react-query";
+import categoryApi from "../../../../apis/category.api";
 
 const MAX_LEN_INPUT_PRICE = 13;
 
@@ -28,10 +24,19 @@ type FormData = NoUndefinedField<Pick<Schema, "price_max" | "price_min">>;
 
 const priceSchema = schema.pick(["price_min", "price_max"]);
 
-export default function AsideFilter({ categories, queryConfig }: AsideFilterProps) {
+export default function AsideFilter() {
+	const queryConfig = useQueryConfig();
 	const { category } = queryConfig;
 	const navigate = useNavigate();
 	const { t } = useTranslation(["home"]);
+
+	const { data: categoriesData } = useQuery({
+		queryKey: ["categories"],
+		queryFn: () => {
+			return categoryApi.getCategories();
+		},
+	});
+	const categories = categoriesData?.data.data || [];
 	const {
 		control,
 		trigger,

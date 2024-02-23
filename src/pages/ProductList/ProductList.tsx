@@ -7,12 +7,12 @@ import SortProductList from "./components/SortProductList";
 import productApi from "../../apis/product.api";
 import Pagination from "../../components/Pagination";
 import { ProductListConfig } from "../../types/product.type";
-import categoryApi from "../../apis/category.api";
 import useQueryConfig from "../../hooks/useQueryConfig";
 import ProductSkeleton from "./components/Product/ProductSkeleton";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import path from "../../constants/path";
+import MobileFilter from "./components/MobileFilter";
 
 const NoProductFound = () => {
 	const navigate = useNavigate();
@@ -53,13 +53,6 @@ export default function ProductList() {
 		staleTime: 3 * 1000 * 60,
 	});
 
-	const { data: categoriesData } = useQuery({
-		queryKey: ["categories"],
-		queryFn: () => {
-			return categoryApi.getCategories();
-		},
-	});
-
 	return (
 		<div className="bg-gray-100 py-6">
 			<Helmet>
@@ -69,7 +62,7 @@ export default function ProductList() {
 			<div className="container">
 				<div className="grid grid-cols-12 gap-6">
 					<div className="col-span-4 hidden sm:col-span-4 sm:block md:col-span-3">
-						<AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
+						<AsideFilter />
 					</div>
 					{productsData && (
 						<div className="col-span-12 sm:col-span-8 md:col-span-9">
@@ -79,6 +72,7 @@ export default function ProductList() {
 										queryConfig={queryConfig}
 										pageSize={productsData.data.data.pagination.page_size}
 									/>
+									<MobileFilter />
 									<div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 										{productsData.data.data.products.map((product) => (
 											<div key={product._id} className="col-span-1">

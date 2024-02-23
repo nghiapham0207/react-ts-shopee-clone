@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import path from "../../../../constants/path";
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment, useContext, useRef } from "react";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { AppContext } from "../../../../contexts/app.context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -8,10 +8,11 @@ import authApi from "../../../../apis/auth.api";
 import { clearLS } from "../../../../utils/auth";
 import { purchasesStatus } from "../../../../constants/purchase";
 import { getAvatarUrl } from "../../../../utils/utils";
+import useShowModal from "../../../../hooks/useShowModal";
 
 export default function NavHeaderMobile() {
 	const navigate = useNavigate();
-	const [showMenu, setShowMenu] = useState(false);
+	const [showMenu, setShowMenu] = useShowModal();
 	const menuRef = useRef<HTMLDivElement>(null);
 	const { isAuthenticated, profile } = useContext(AppContext);
 	const queryClient = useQueryClient();
@@ -44,7 +45,7 @@ export default function NavHeaderMobile() {
 							setShowMenu(false);
 						}
 					}}
-					className="fixed inset-0 z-50 h-screen w-full overflow-y-auto bg-gray-900/50">
+					className="fixed inset-0 z-50 h-screen w-full overflow-y-auto bg-gray-900/50 sm:hidden">
 					<div ref={menuRef} className="h-full w-64 bg-white text-black">
 						<div className="flex flex-col">
 							<div className="px-3 py-2">
@@ -120,7 +121,7 @@ export default function NavHeaderMobile() {
 										</div>
 									</Fragment>
 								)}
-								<div className="rounded px-4">
+								<div className="rounded px-4 py-2">
 									<LanguageSwitcher />
 								</div>
 							</div>

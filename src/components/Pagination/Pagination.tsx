@@ -93,7 +93,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
 							}).toString(),
 						}}
 						className={classNames(
-							"mx-2 cursor-pointer rounded border bg-white px-3 py-2 shadow-sm",
+							"mx-1 cursor-pointer rounded border bg-white px-3 py-1 shadow-sm sm:mx-2 sm:py-2",
 							{
 								"border-cyan-500": pageNumber === page,
 								"border-transparent": pageNumber !== page,
@@ -106,9 +106,9 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
 			});
 	};
 	return (
-		<div className="mt-6 flex flex-wrap justify-center">
+		<div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-0">
 			{page === 1 ? (
-				<span className="mx-2 cursor-not-allowed rounded bg-white/60 px-3 py-2 shadow-sm">
+				<span className="mx-1 cursor-not-allowed rounded bg-white/60 px-3 py-1 shadow-sm sm:mx-2 sm:py-2">
 					Prev
 				</span>
 			) : (
@@ -120,13 +120,13 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
 							page: (page - 1).toString(),
 						}).toString(),
 					}}
-					className="mx-2 cursor-pointer rounded bg-white px-3 py-2 shadow-sm">
+					className="mx-1 cursor-pointer rounded bg-white px-3 py-1 shadow-sm sm:mx-2 sm:py-2">
 					Prev
 				</Link>
 			)}
 			{renderPagination()}
 			{page === pageSize ? (
-				<span className="mx-2 cursor-not-allowed rounded bg-white/60 px-3 py-2 shadow-sm">
+				<span className="mx-1 cursor-not-allowed rounded bg-white/60 px-3 py-1 shadow-sm sm:mx-2 sm:py-2">
 					Next
 				</span>
 			) : (
@@ -138,7 +138,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
 							page: (page + 1).toString(),
 						}).toString(),
 					}}
-					className="mx-2 cursor-pointer rounded bg-white px-3 py-2 shadow-sm">
+					className="mx-1 cursor-pointer rounded bg-white px-3 py-1 shadow-sm sm:mx-2 sm:py-2">
 					Next
 				</Link>
 			)}

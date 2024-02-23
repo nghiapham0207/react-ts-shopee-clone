@@ -98,7 +98,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 								bán chạy
 							</button>
 							<select
-								aria-labelledby="price of product"
+								aria-label="price-of-product"
 								className={classNames(
 									"text-lef h-8 bg-white px-2 capitalize outline-none md:px-4",
 									{
@@ -179,6 +179,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 							</span>
 						) : (
 							<Link
+								aria-label="previous-page"
 								to={{
 									pathname: path.home,
 									search: createSearchParams({
@@ -220,6 +221,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 							</span>
 						) : (
 							<Link
+								aria-label="next-page"
 								to={{
 									pathname: path.home,
 									search: createSearchParams({
