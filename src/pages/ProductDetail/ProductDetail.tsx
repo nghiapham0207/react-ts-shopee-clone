@@ -21,6 +21,20 @@ import path from "../../constants/path";
 import { useTranslation } from "react-i18next";
 import ProductDetailSkeleton from "./ProductDetailSkeleton";
 import { AppContext } from "../../contexts/app.context";
+import noProductFound from "../../assets/images/nothing-in-cart.png";
+
+const NoProductFound = () => {
+	return (
+		<div className="bg-gray-100">
+			<div className="container">
+				<div className="flex h-96 flex-col items-center justify-center">
+					<img className="h-52 w-52" src={noProductFound} alt="product is not found!" />
+					<span className="text-sm">Sản phẩm này không tồn tại</span>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default function ProductDetail() {
 	const { isAuthenticated } = useContext(AppContext);
@@ -29,12 +43,13 @@ export default function ProductDetail() {
 	const queryClient = useQueryClient();
 	const { nameId } = useParams();
 	const id = getIdFromNameId(nameId as string);
-	const { data: productState } = useQuery({
+	const { data: productState, isLoading } = useQuery({
 		queryKey: ["product", id],
 		queryFn: () => productApi.getProductDetail(id as string),
 	});
 
 	const product = productState?.data.data;
+	console.log("product", product);
 
 	const [currentIndexImages, setCurrentIndexImages] = useState([0, 5]);
 	const [activeImage, setActiveImage] = useState("");
@@ -138,8 +153,11 @@ export default function ProductDetail() {
 		setBuyCount(value);
 	};
 
-	if (!product) {
+	if (!product && isLoading) {
 		return <ProductDetailSkeleton />;
+	}
+	if (!product) {
+		return <NoProductFound />;
 	}
 	return (
 		<div className="bg-gray-200 py-6">

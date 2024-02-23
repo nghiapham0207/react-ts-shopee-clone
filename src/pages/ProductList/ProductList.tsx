@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import path from "../../constants/path";
 import MobileFilter from "./components/MobileFilter";
 
-const NoProductFound = () => {
+const NoProductsFound = () => {
 	const navigate = useNavigate();
 	const handleClearFilter = () => {
 		navigate({
@@ -86,7 +86,7 @@ export default function ProductList() {
 									/>
 								</Fragment>
 							) : (
-								<NoProductFound />
+								<NoProductsFound />
 							)}
 						</div>
 					)}
