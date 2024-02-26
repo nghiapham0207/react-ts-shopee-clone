@@ -14,5 +14,6 @@ export default function useShowModal(): [boolean, (isShow: boolean) => void] {
 		}
 		setShowModal(isShow);
 	};
+	// tupple type
 	return [showModal, handleShowModal];
 }

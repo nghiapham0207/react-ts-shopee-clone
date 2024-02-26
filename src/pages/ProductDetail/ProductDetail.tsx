@@ -163,8 +163,8 @@ export default function ProductDetail() {
 		<div className="bg-gray-200 py-6">
 			<div className="container">
 				<div className="bg-white p-2 shadow sm:p-4">
-					<div className="flex flex-col gap-6 lg:grid lg:grid-rows-2 lg:gap-9 xl:grid-cols-12 xl:grid-rows-none">
-						<div className="lg:row-span-1 xl:col-span-5">
+					<div className="flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-9">
+						<div className="lg:col-span-5">
 							<div
 								className="relative w-full overflow-hidden pt-[100%] shadow hover:cursor-zoom-in"
 								onMouseMove={handleZoom}
@@ -236,7 +236,7 @@ export default function ProductDetail() {
 								</button>
 							</div>
 						</div>
-						<div className="lg:row-span-1 xl:col-span-7">
+						<div className="lg:col-span-7">
 							<h1 className="text-xl font-medium capitalize">{product.name}</h1>
 							<div className="mt-3 flex items-center">
 								<div className="flex items-center">
