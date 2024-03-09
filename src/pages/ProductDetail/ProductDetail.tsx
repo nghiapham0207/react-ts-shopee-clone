@@ -162,7 +162,7 @@ export default function ProductDetail() {
 	return (
 		<div className="bg-gray-200 py-6">
 			<div className="container">
-				<div className="bg-white p-2 shadow sm:p-4">
+				<div className="rounded bg-white p-2 shadow sm:p-4">
 					<div className="flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-9">
 						<div className="lg:col-span-5">
 							<div
@@ -254,7 +254,7 @@ export default function ProductDetail() {
 								</div>
 							</div>
 							{/* discount */}
-							<div className="mt-8 flex items-center bg-gray-50 px-2 py-2 md:px-5 md:py-4">
+							<div className="mt-8 flex items-center rounded bg-gray-50 px-2 py-2 md:px-5 md:py-4">
 								<div className="text-xs text-gray-500 line-through sm:text-base">
 									{"₫" + formatCurrency(product.price_before_discount)}
 								</div>
@@ -339,7 +339,7 @@ export default function ProductDetail() {
 			</div>
 			<div className="mt-8">
 				<div className="container">
-					<div className="mt-8 bg-white p-4 shadow">
+					<div className="mt-8 rounded bg-white p-4 shadow">
 						<div className="rounded bg-gray-50 p-4 text-lg uppercase text-slate-700">
 							MÔ TẢ SẢN PHẨM
 						</div>

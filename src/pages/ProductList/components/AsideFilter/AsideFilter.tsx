@@ -199,7 +199,7 @@ export default function AsideFilter() {
 					</div>
 					<Button
 						isLoading={false}
-						className="hover:bg-orange-80 flex w-full items-center justify-center bg-orange p-2 text-sm uppercase text-white">
+						className="hover:bg-orange-80 flex w-full items-center justify-center rounded-sm bg-orange p-2 text-sm uppercase text-white">
 						áp dụng
 					</Button>
 				</form>
@@ -210,7 +210,7 @@ export default function AsideFilter() {
 			<div className="my-4 h-[1px] bg-gray-300"></div>
 			<Button
 				onClick={handleClearFilter}
-				className="hover:bg-orange-80 flex w-full items-center justify-center bg-orange px-2 py-2 text-sm uppercase text-white">
+				className="hover:bg-orange-80 flex w-full items-center justify-center rounded-sm bg-orange px-2 py-2 text-sm uppercase text-white">
 				Xóa tất cả
 			</Button>
 		</div>

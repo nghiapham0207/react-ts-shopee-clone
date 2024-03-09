@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Helmet } from "react-helmet-async";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
@@ -9,38 +10,8 @@ import Pagination from "../../components/Pagination";
 import { ProductListConfig } from "../../types/product.type";
 import useQueryConfig from "../../hooks/useQueryConfig";
 import ProductSkeleton from "./components/Product/ProductSkeleton";
-import { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
-import path from "../../constants/path";
 import MobileFilter from "./components/MobileFilter";
-
-const NoProductsFound = () => {
-	const navigate = useNavigate();
-	const handleClearFilter = () => {
-		navigate({
-			pathname: path.home,
-		});
-	};
-	return (
-		<section>
-			<div className="my-20 flex flex-col items-center justify-center">
-				<img src="/public/images/no-product-found.png" alt="not-found" className="h-32 w-32" />
-				<div className="text-gray-400">
-					Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và tìm lại nhé?
-				</div>
-				<div className="mt-2 text-gray-400">or</div>
-				<div className="mt-2">
-					<button
-						type="button"
-						onClick={handleClearFilter}
-						className="rounded-sm bg-orange px-5 py-4 font-light text-white">
-						Xóa bộ lọc
-					</button>
-				</div>
-			</div>
-		</section>
-	);
-};
+import NoProductsFound from "./components/NoProductsFound";
 
 export default function ProductList() {
 	const queryConfig = useQueryConfig();

@@ -67,14 +67,15 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 		};
 	}, [mediaQuery]);
 	return (
-		<div className="bg-gray-300/40 px-3 py-2 md:py-4">
+		<div className="rounded-sm bg-gray-300/40 px-3 py-2 md:py-4">
 			<div className="flex flex-wrap items-center justify-between gap-2">
 				<div className="flex flex-wrap items-center gap-2 [&>button]:text-xs md:[&>button]:text-sm [&>select]:text-xs md:[&>select]:text-sm">
 					<div className="text-xs md:text-sm">Sắp xếp theo</div>
 					{lgScreen && (
 						<Fragment>
 							<button
-								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+								type="button"
+								className={classNames("h-8 rounded-sm px-2 text-center capitalize md:px-4", {
 									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.view),
 									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.view),
 								})}
@@ -82,7 +83,8 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 								phổ biến
 							</button>
 							<button
-								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+								type="button"
+								className={classNames("h-8 rounded-sm px-2 text-center capitalize md:px-4", {
 									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.createdAt),
 									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.createdAt),
 								})}
@@ -90,7 +92,8 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 								mới nhất
 							</button>
 							<button
-								className={classNames("h-8 px-2 text-center capitalize md:px-4", {
+								type="button"
+								className={classNames("h-8 rounded-sm px-2 text-center capitalize md:px-4", {
 									"bg-orange text-white hover:bg-orange/80": isActiveSortBy(sortBy.sold),
 									"bg-white text-black hover:bg-slate-100": !isActiveSortBy(sortBy.sold),
 								})}
@@ -100,7 +103,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 							<select
 								aria-label="price-of-product"
 								className={classNames(
-									"text-lef h-8 bg-white px-2 capitalize outline-none md:px-4",
+									"text-lef h-8 rounded-sm bg-white px-2 capitalize outline-none md:px-4",
 									{
 										"text-orange": isActiveSortBy(sortBy.price),
 										"text-black": !isActiveSortBy(sortBy.price),
@@ -124,7 +127,7 @@ export default function SortProductList({ queryConfig, pageSize }: SortProductLi
 					)}
 					{!lgScreen && (
 						<select
-							className="h-8 px-2 text-left capitalize focus:outline-orange"
+							className="h-8 rounded px-2 text-left capitalize focus:outline-orange"
 							onChange={(evt) => {
 								const array = evt.target.value.split("-");
 								const prefix = array[0] + "-";
